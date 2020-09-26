@@ -1,3 +1,17 @@
-body {
-    background-color: beige;
+header {
+    height: 100px;
+    width: 100%;
+    border: solid;
+}
+
+div.left{
+    border: solid;
+}
+
+div.middle{
+    border: solid;
+}
+
+div.right{
+  border: solid;
 }
