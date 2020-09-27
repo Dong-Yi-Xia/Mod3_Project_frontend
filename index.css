@@ -2,6 +2,8 @@ header {
     height: 100px;
     width: 100%;
     border: solid;
+    font-family: 'Petit Formal Script', cursive;
+    color: rgb(209, 32, 209);
 }
 
 div.left{
