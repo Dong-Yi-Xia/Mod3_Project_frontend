@@ -1,6 +1,38 @@
-flavorList = document.querySelector('div.flavorList')
-mainImage = document.querySelector('div.imageDisplay')
+// Stable Element
+// _______________________________________________________________________
 
+let flavorList = document.querySelector('div.flavorList')
+let mainImage = document.querySelector('div.imageDisplay')
+let menuNarBar = document.querySelector('div.menuNarBar')
+let selectedOption = document.querySelector('div.selected_options')
+let toppingDD = document.querySelector('select#toppingDropDown')
+let milkDD = document.querySelector('select#milkDropDown')
+let scoopDD = document.querySelector('select#scoopDropDown')
+
+let selectedTopping = document.querySelector('p#selectedTopping')
+let selectedMilk = document.querySelector('p#selectedMilk')
+let selectedScoop = document.querySelector('p#selectedScoop')
+
+let priceHolder = 0
+
+// fetch request
+// _______________________________________________________________________
+
+fetch('http://localhost:3000/milks')
+.then(r => r.json())
+.then(objArr => {
+    objArr.forEach(objMilk => {
+        addMilkOption(objMilk)
+    })
+});
+
+fetch('http://localhost:3000/toppings')
+.then(r => r.json())
+.then(objArr => {
+    objArr.forEach(objTopping => {
+        addToppingOption(objTopping)
+    })
+});
 
 
 fetch('http://localhost:3000/flavors')
@@ -11,18 +43,69 @@ fetch('http://localhost:3000/flavors')
     })
 });
 
+// 
+// _______________________________________________________________________
+
 function turnintoList(objFlavor) {
     let listUL = document.createElement('ul')
     let listLI = document.createElement('li')
     let imageFl = document.createElement('img')
     flavorList.append(listUL)
     listUL.append(listLI)
-    mainImage.append(imageFl)
-
     listLI.innerText = objFlavor.name
-    imageFl.src = objFlavor.image
     
+    changeToPointer(listLI)
+
+    listLI.addEventListener("click", (evt)=>{
+        mainImage.innerText = ""
+        mainImage.append(imageFl)
+        imageFl.src = objFlavor.image
+
+    })
+}
+
+// ice cream options
+// _______________________________________________________________________
+
+function options(){  
+    toppingDD.addEventListener("change", (evt)=>{
+        currentInput = evt.target.value
+        selectedTopping.innerText = `Selected Topping: ${currentInput}`
+    })
+    milkDD.addEventListener("change", (evt)=>{
+        currentInput = evt.target.value
+        selectedMilk.innerText = `Selected Milk: ${currentInput}`
+    })
+
+    scoopDD.addEventListener("change", (evt)=>{
+        currentInput = evt.target.value
+        selectedScoop.innerText = `Selected Scoop: ${currentInput}`
+    })
+}
+
+options()
+
+function addToppingOption (objTopping) {
+    let optionsTop = document.createElement('option')
+        optionsTop.value = objTopping.name
+        optionsTop.innerText = objTopping.name
+    toppingDD.append(optionsTop)
+}
+
+function addMilkOption (objMilk) {
+    let optionsMilk = document.createElement('option')
+        optionsMilk.value = objMilk.name
+        optionsMilk.innerText = objMilk.name
+    milkDD.append(optionsMilk)
+}
 
 
+// extra
+// _______________________________________________________________________=
+
+function changeToPointer(li){
+    li.addEventListener("mouseover", (evt)=>{
+        li.style.cursor = "pointer"
+    })
 }
 
