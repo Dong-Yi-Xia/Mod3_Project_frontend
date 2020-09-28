@@ -14,16 +14,29 @@ let selectedMilk = document.querySelector('p#selectedMilk')
 let selectedScoop = document.querySelector('p#selectedScoop')
 let selectedPrice = document.querySelector('p#totalPrice')
 
+let seeTotalButton = document.querySelector('button#addButton')
 let purchaseButton = document.querySelector('button#purchaseButton')
 let reviewBox = document.querySelector('div#reviews')
 let reviewUL = document.querySelector('ul#reviewUL')
 
-let foundToppingPrice = 0
+let foundToppingObj = 0
+let foundMlikObj = 0
+let foundScoopObj = 0
 
-let priceHolder = 0
+
+
+
 
 // fetch request
 // _______________________________________________________________________
+
+fetch('http://localhost:3000/scoops')
+.then(r => r.json())
+.then(objArr => {
+    objArr.forEach(objScoop => {
+        addScoopOption(objScoop)
+    })
+});
 
 fetch('http://localhost:3000/milks')
 .then(r => r.json())
@@ -38,7 +51,6 @@ fetch('http://localhost:3000/toppings')
 .then(objArr => {
     objArr.forEach(objTopping => {
         addToppingOption(objTopping)
-        // options(objTopping)
     })
 });
 
@@ -76,8 +88,6 @@ function turnintoList(objFlavor) {
             reviewUL.append(reviewLI)
         })
 
-        
-
     })
 }
 
@@ -85,32 +95,57 @@ function turnintoList(objFlavor) {
 // _______________________________________________________________________
 
 function options(){  
-    let top = 0
-    let mi = 0
-    let sco = 0
-    let total = top + mi + sco
+    
     toppingDD.addEventListener("change", (evt)=>{
         currentInput = evt.target.value
         selectedTopping.innerText = `Selected Topping: ${currentInput}`
-        // if (objTopping.name === currentInput) {
-        //     return top = objTopping.price
-        // }
-            
+        fetch('http://localhost:3000/toppings')
+        .then(r => r.json())
+        .then(objArr => {
+            let found = objArr.find(ele => {
+                return ele.name === currentInput
+            }) 
+            foundToppingObj = found
+        })
     })
+
     milkDD.addEventListener("change", (evt)=>{
         currentInput = evt.target.value
         selectedMilk.innerText = `Selected Milk: ${currentInput}`
+
+        fetch('http://localhost:3000/milks')
+        .then(r => r.json())
+        .then(objArr => {
+            let found = objArr.find(ele => {
+                return ele.name === currentInput
+            }) 
+            foundMilkObj = found
+        })
     })
 
     scoopDD.addEventListener("change", (evt)=>{
         currentInput = evt.target.value
-        selectedScoop.innerText = `Selected Scoop: ${currentInput}`
+        selectedMilk.innerText = `Selected Scoop: ${currentInput}`
+
+        fetch('http://localhost:3000/scoops')
+        .then(r => r.json())
+        .then(objArr => {
+            let found = objArr.find(ele => {
+                return ele.number === Number(currentInput)
+            }) 
+            foundScoopObj = found
+        })
     })
+
+    displayTotal()
+
 }
+
 
 options()
 
-
+// ice cream options display
+// _______________________________________________________________________
 function addToppingOption (objTopping) {
     let optionsTop = document.createElement('option')
         optionsTop.value = objTopping.name
@@ -125,16 +160,18 @@ function addMilkOption (objMilk) {
     milkDD.append(optionsMilk)
 }
 
+function addScoopOption (objScoop) {
+    let optionsScoop = document.createElement('option')
+        optionsScoop.value = objScoop.number
+        optionsScoop.innerText = objScoop.number
+    scoopDD.append(optionsScoop)
+}
 
-
-  
-   
-    
-
-
-
-
-
+function displayTotal(){
+    seeTotalButton.addEventListener("click", (evt)=>{
+        console.log(foundToppingObj,foundMilkObj,foundScoopObj)
+    })
+}
 
 // extra
 // _______________________________________________________________________=
