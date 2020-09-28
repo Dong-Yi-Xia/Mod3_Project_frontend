@@ -12,6 +12,11 @@ var scoopDD = document.querySelector('select#scoopDropDown');
 var selectedTopping = document.querySelector('p#selectedTopping');
 var selectedMilk = document.querySelector('p#selectedMilk');
 var selectedScoop = document.querySelector('p#selectedScoop');
+var selectedPrice = document.querySelector('p#totalPrice');
+var purchaseButton = document.querySelector('button#purchaseButton');
+var reviewBox = document.querySelector('div#reviews');
+var reviewUL = document.querySelector('ul#reviewUL');
+var foundToppingPrice = 0;
 var priceHolder = 0; // fetch request
 // _______________________________________________________________________
 
@@ -26,7 +31,7 @@ fetch('http://localhost:3000/toppings').then(function (r) {
   return r.json();
 }).then(function (objArr) {
   objArr.forEach(function (objTopping) {
-    addToppingOption(objTopping);
+    addToppingOption(objTopping); // options(objTopping)
   });
 });
 fetch('http://localhost:3000/flavors').then(function (r) {
@@ -50,15 +55,27 @@ function turnintoList(objFlavor) {
     mainImage.innerText = "";
     mainImage.append(imageFl);
     imageFl.src = objFlavor.image;
+    reviewUL.innerText = "";
+    objFlavor.reviews.forEach(function (reviewObj) {
+      var reviewLI = document.createElement('li');
+      reviewLI.innerText = reviewObj.review;
+      reviewUL.append(reviewLI);
+    });
   });
 } // ice cream options
 // _______________________________________________________________________
 
 
 function options() {
+  var top = 0;
+  var mi = 0;
+  var sco = 0;
+  var total = top + mi + sco;
   toppingDD.addEventListener("change", function (evt) {
     currentInput = evt.target.value;
-    selectedTopping.innerText = "Selected Topping: ".concat(currentInput);
+    selectedTopping.innerText = "Selected Topping: ".concat(currentInput); // if (objTopping.name === currentInput) {
+    //     return top = objTopping.price
+    // }
   });
   milkDD.addEventListener("change", function (evt) {
     currentInput = evt.target.value;

@@ -12,6 +12,13 @@ let scoopDD = document.querySelector('select#scoopDropDown')
 let selectedTopping = document.querySelector('p#selectedTopping')
 let selectedMilk = document.querySelector('p#selectedMilk')
 let selectedScoop = document.querySelector('p#selectedScoop')
+let selectedPrice = document.querySelector('p#totalPrice')
+
+let purchaseButton = document.querySelector('button#purchaseButton')
+let reviewBox = document.querySelector('div#reviews')
+let reviewUL = document.querySelector('ul#reviewUL')
+
+let foundToppingPrice = 0
 
 let priceHolder = 0
 
@@ -31,6 +38,7 @@ fetch('http://localhost:3000/toppings')
 .then(objArr => {
     objArr.forEach(objTopping => {
         addToppingOption(objTopping)
+        // options(objTopping)
     })
 });
 
@@ -55,11 +63,20 @@ function turnintoList(objFlavor) {
     listLI.innerText = objFlavor.name
     
     changeToPointer(listLI)
-
+    
     listLI.addEventListener("click", (evt)=>{
         mainImage.innerText = ""
         mainImage.append(imageFl)
         imageFl.src = objFlavor.image
+        
+        reviewUL.innerText = ""
+        objFlavor.reviews.forEach(reviewObj => {
+            let reviewLI = document.createElement('li')
+            reviewLI.innerText = reviewObj.review
+            reviewUL.append(reviewLI)
+        })
+
+        
 
     })
 }
@@ -68,9 +85,17 @@ function turnintoList(objFlavor) {
 // _______________________________________________________________________
 
 function options(){  
+    let top = 0
+    let mi = 0
+    let sco = 0
+    let total = top + mi + sco
     toppingDD.addEventListener("change", (evt)=>{
         currentInput = evt.target.value
         selectedTopping.innerText = `Selected Topping: ${currentInput}`
+        // if (objTopping.name === currentInput) {
+        //     return top = objTopping.price
+        // }
+            
     })
     milkDD.addEventListener("change", (evt)=>{
         currentInput = evt.target.value
@@ -85,6 +110,7 @@ function options(){
 
 options()
 
+
 function addToppingOption (objTopping) {
     let optionsTop = document.createElement('option')
         optionsTop.value = objTopping.name
@@ -98,6 +124,16 @@ function addMilkOption (objMilk) {
         optionsMilk.innerText = objMilk.name
     milkDD.append(optionsMilk)
 }
+
+
+
+  
+   
+    
+
+
+
+
 
 
 // extra

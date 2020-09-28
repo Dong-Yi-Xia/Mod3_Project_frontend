@@ -26,3 +26,22 @@ img{
 body {
     background-image: url('image/bg.jpg');
 }
+
+h1{
+    font-family: 'Satisfy', cursive;
+    color: rgb(159, 23, 201); 
+    font-size: 90px;
+    font-weight: bold;
+    /* text-shadow: 4px 4px 8px #ff672b; */
+    text-shadow: 0 0 3px #8c00ff, 0 2px 5px #ff6600;
+}
+
+div.flavorList{
+   font-family: 'Satisfy', cursive;
+   color: rgb(255, 107, 8);
+   font-size: 20px;
+}
+
+h4{
+color: rgb(43, 22, 43)
+}
