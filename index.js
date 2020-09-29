@@ -93,11 +93,13 @@ function turnintoList(objFlavor) {
         mainImage.append(imageFl)
         imageFl.src = objFlavor.image
         
-        reviewUL.innerText = ""
-        addingReviewObjtoHTML(objFlavor)
-
         formReview.innerText = ""
-        createReviewForm()
+        createReviewForm(objFlavor)
+
+        reviewUL.innerText = ""
+        objFlavor.reviews.forEach(reviewObj => {
+            addingReviewObjtoHTML(reviewObj)
+        })
 
        
 
@@ -109,16 +111,33 @@ function turnintoList(objFlavor) {
 
 // ice cream options
 // _______________________________________________________________________
-
-let addingReviewObjtoHTML = (obj) =>{
-    obj.reviews.forEach(reviewObj => {
+let addingReviewObjtoHTML = (reviewObj) => {
         let reviewLI = document.createElement('li')
-        reviewLI.innerText = reviewObj.review
+            reviewLI.innerText = reviewObj.review
+        let reviewDeleteButton = document.createElement('button')
+            reviewDeleteButton.innerText = "Remove Review"
+        reviewLI.append(reviewDeleteButton)
         reviewUL.append(reviewLI)
+
+        deleteAReview(reviewDeleteButton, reviewObj, reviewLI)   
+    }
+
+
+let deleteAReview = (reviewDeleteButton, reviewObj, reviewLI) =>{
+    reviewDeleteButton.addEventListener("click", (evt)=>{
+        fetch(`http://localhost:3000/reviews/${reviewObj.id}`, {
+            method: "DELETE"
+        })
+        .then(r => r.json())
+        .then(response => {
+            //update the frontend
+           reviewLI.remove()
+        })
     })
 }
 
-let createReviewForm = () =>{
+
+let createReviewForm = (objFlavor) =>{
     let formLabel = document.createElement('label')
         formLabel.innerText = "Creating a New Review"
     let formTextArea = document.createElement('textarea')
@@ -130,18 +149,14 @@ let createReviewForm = () =>{
         formButton.innerText = "Submit Review"
     formReview.append(formLabel,formTextArea,formButton)    
 
-    submitAReview(formButton, formTextArea)
+    submitAReview(formButton, formTextArea, objFlavor)
 }
 
-let submitAReview = (formButton, formTextArea) => {
+let submitAReview = (formButton, formTextArea, objFlavor) => {
     formButton.addEventListener("click", (evt)=>{
         evt.preventDefault()
 
         let content = formTextArea.value
-    //    console.log(foundMilkObj)
-    //    console.log(foundToppingObj)
-    //    console.log(foundScoopObj)
-    //    console.log(foundFlavorObj)
         fetch('http://localhost:3000/reviews', {
             method: "POST",
             headers: {
@@ -149,7 +164,7 @@ let submitAReview = (formButton, formTextArea) => {
             },
             body: JSON.stringify({
                 //need to create userObj 
-                user_id: foundFlavorObj,
+                user_id: foundUserObj,
                 flavor_id: foundFlavorObj.id,
                 topping_id: foundToppingObj.id,
                 milk_id: foundMilkObj.id,
@@ -158,13 +173,15 @@ let submitAReview = (formButton, formTextArea) => {
             })
         })
         .then(r => r.json())
-        .then(createReview => {
-            console.log(createReview)
+        .then(createReviewObj => {
+            //update the frontend
+            addingReviewObjtoHTML(createReviewObj)
+            //Update Inner Memory
+            objFlavor.reviews.push(createReviewObj)
         })
 
     })
 }
-
 
 
 function options(){  
