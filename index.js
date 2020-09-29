@@ -15,14 +15,20 @@ let selectedScoop = document.querySelector('p#selectedScoop')
 let selectedPrice = document.querySelector('p#totalPrice')
 
 let seeTotalButton = document.querySelector('button#addButton')
-let purchaseButton = document.querySelector('button#purchaseButton')
+// let purchaseButton = document.querySelector('button#purchaseButton')
 let reviewBox = document.querySelector('div#reviews')
 let reviewUL = document.querySelector('ul#reviewUL')
+let submitReviewButton = document.querySelector('button#submitReviewButton')
+let reviewContent = document.querySelector('textarea#reviewContent')
+let formReview = document.querySelector('div#form-review')
 
 let foundToppingObj 
-let foundMlikObj 
+let foundMilkObj 
 let foundScoopObj 
 let foundFlavorObj 
+
+let foundUserObj = 1
+
 
 
 
@@ -86,22 +92,82 @@ function turnintoList(objFlavor) {
         mainImage.innerText = ""
         mainImage.append(imageFl)
         imageFl.src = objFlavor.image
+        
+        reviewUL.innerText = ""
+        addingReviewObjtoHTML(objFlavor)
+
+        formReview.innerText = ""
+        createReviewForm()
+
+       
+
         displayTotal()
 
-        reviewUL.innerText = ""
-        objFlavor.reviews.forEach(reviewObj => {
-            let reviewLI = document.createElement('li')
-            reviewLI.innerText = reviewObj.review
-            reviewUL.append(reviewLI)
-        })
-
+        
     })
 }
 
 // ice cream options
 // _______________________________________________________________________
 
-function options(element){  
+let addingReviewObjtoHTML = (obj) =>{
+    obj.reviews.forEach(reviewObj => {
+        let reviewLI = document.createElement('li')
+        reviewLI.innerText = reviewObj.review
+        reviewUL.append(reviewLI)
+    })
+}
+
+let createReviewForm = () =>{
+    let formLabel = document.createElement('label')
+        formLabel.innerText = "Creating a New Review"
+    let formTextArea = document.createElement('textarea')
+        formTextArea.id = "reviewContent"
+        formTextArea.type = "text"
+    let formButton = document.createElement('button')
+        formButton.type = "submit"
+        formButton.id = "submitReviewButton"
+        formButton.innerText = "Submit Review"
+    formReview.append(formLabel,formTextArea,formButton)    
+
+    submitAReview(formButton, formTextArea)
+}
+
+let submitAReview = (formButton, formTextArea) => {
+    formButton.addEventListener("click", (evt)=>{
+        evt.preventDefault()
+
+        let content = formTextArea.value
+    //    console.log(foundMilkObj)
+    //    console.log(foundToppingObj)
+    //    console.log(foundScoopObj)
+    //    console.log(foundFlavorObj)
+        fetch('http://localhost:3000/reviews', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                //need to create userObj 
+                user_id: foundFlavorObj,
+                flavor_id: foundFlavorObj.id,
+                topping_id: foundToppingObj.id,
+                milk_id: foundMilkObj.id,
+                scoop_id: foundScoopObj.id,
+                review: content
+            })
+        })
+        .then(r => r.json())
+        .then(createReview => {
+            console.log(createReview)
+        })
+
+    })
+}
+
+
+
+function options(){  
     
     toppingDD.addEventListener("change", (evt)=>{
         currentInput = evt.target.value
@@ -127,7 +193,7 @@ function options(element){
             let found = objArr.find(ele => {
                 return ele.name === currentInput
             }) 
-            foundMlikObj = found
+            foundMilkObj = found
             displayTotal()
         })
     })
@@ -149,7 +215,6 @@ function options(element){
 
 
     displayTotal()
-
 }
 
 
@@ -183,9 +248,8 @@ function displayTotal(){
     // seeTotalButton.addEventListener("click", (evt)=>{   
         displayPrice.innerText = ''
         let priceH2 = document.createElement('h2')
-            priceH2.innerText = `$ ${foundToppingObj.price +foundMlikObj.price + foundScoopObj.price + foundFlavorObj.price}`
+            priceH2.innerText = `Price: $${foundToppingObj.price +foundMilkObj.price + foundScoopObj.price + foundFlavorObj.price}`
         displayPrice.append(priceH2)
-        console.log(foundToppingObj, foundMlikObj, foundScoopObj, foundFlavorObj)
     // })
 }
 

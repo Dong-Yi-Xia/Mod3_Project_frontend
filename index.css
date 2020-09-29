@@ -7,15 +7,15 @@ header {
 }
 
 div.left{
-    /* border: solid; */
+   background-color: rgb(232, 206, 240, .4);
 }
 
 div.middle{
-    /* border: solid; */
+   background-color: rgb(232, 206, 240, .4);
 }
 
 div.right{
-  /* border: solid; */
+ background-color: rgb(232, 206, 240, .4);
 }
 
 img{
