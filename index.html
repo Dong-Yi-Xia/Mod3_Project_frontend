@@ -28,26 +28,33 @@
 
     <div class="menuNarBar">
 
+      <!-- <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Toppings:
+        </button>
+        <div class="dropdown-menu" id="topDDButton" aria-labelledby="dropdownMenuButton"> </div>
+      </div> -->
+
+
       <label for="toppings">Toppings:</label>
       <select id="toppingDropDown">
-        <option value="NONE">NONE</option>
+        <option value="">Select One Topping</option>
       </select>
 
       <label for="milks">Milks:</label>
       <select id="milkDropDown">
-        <option value=""></option>
+        <option value="">Select One Base</option>
       </select>
 
       <label for="scoops">Scoops:</label>
       <select id="scoopDropDown">
-        <option value=""></option>
+        <option value="">Select A Number of Scoops</option>
       </select>
 
-      <!-- <button id="addButton">See Current Total </button> -->
 
-      <button id="addButton" type="button" class="btn btn-secondary">
+      <!-- <button id="addButton" type="button" class="btn btn-secondary">
         See Current Total
-      </button>
+      </button> -->
 
       <button id="purchaseButton" type="button" class="btn btn-secondary">Purchase Now</button>
   </div>
@@ -85,13 +92,19 @@
 
             <!-- right -->
             <div class="col-4 right" >
-              <div id="reviews">
-                Review
-                <ul id="reviewUL">
-
-                </ul>
-
+              <!--review form-->
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">NEW REVIEW</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <button type="submit" class="btn btn-primary">Submit Review</button>
               </div>
+
+              <!--listing of reviews-->
+              <div id="reviews">
+                Review Listings
+                <ul id="reviewUL"> </ul>
+              </div>
+
             </div>
 
         </div>

@@ -19,10 +19,10 @@ let purchaseButton = document.querySelector('button#purchaseButton')
 let reviewBox = document.querySelector('div#reviews')
 let reviewUL = document.querySelector('ul#reviewUL')
 
-let foundToppingObj = {}
-let foundMlikObj = {}
-let foundScoopObj = {}
-let foundFlavorObj = {}
+let foundToppingObj 
+let foundMlikObj 
+let foundScoopObj 
+let foundFlavorObj 
 
 
 
@@ -86,7 +86,8 @@ function turnintoList(objFlavor) {
         mainImage.innerText = ""
         mainImage.append(imageFl)
         imageFl.src = objFlavor.image
-        
+        displayTotal()
+
         reviewUL.innerText = ""
         objFlavor.reviews.forEach(reviewObj => {
             let reviewLI = document.createElement('li')
@@ -112,6 +113,7 @@ function options(element){
                 return ele.name === currentInput
             }) 
             foundToppingObj = found
+            displayTotal()
         })
     })
 
@@ -126,6 +128,7 @@ function options(element){
                 return ele.name === currentInput
             }) 
             foundMlikObj = found
+            displayTotal()
         })
     })
 
@@ -140,8 +143,10 @@ function options(element){
                 return ele.number === Number(currentInput)
             }) 
             foundScoopObj = found
+            displayTotal()
         })
     })
+
 
     displayTotal()
 
@@ -152,6 +157,7 @@ options()
 
 // ice cream options display
 // _______________________________________________________________________
+
 function addToppingOption (objTopping) {
     let optionsTop = document.createElement('option')
         optionsTop.value = objTopping.name
@@ -174,13 +180,13 @@ function addScoopOption (objScoop) {
 }
 
 function displayTotal(){
-    seeTotalButton.addEventListener("click", (evt)=>{   
+    // seeTotalButton.addEventListener("click", (evt)=>{   
         displayPrice.innerText = ''
         let priceH2 = document.createElement('h2')
             priceH2.innerText = `$ ${foundToppingObj.price +foundMlikObj.price + foundScoopObj.price + foundFlavorObj.price}`
         displayPrice.append(priceH2)
         console.log(foundToppingObj, foundMlikObj, foundScoopObj, foundFlavorObj)
-    })
+    // })
 }
 
 // extra
@@ -194,3 +200,19 @@ function changeToPointer(li){
 
 
 
+
+
+
+// let topDD = document.querySelector('div#topDDButton')
+
+// function addToppingOption (objTopping) {
+//     let aTop = document.createElement('a')
+//         aTop.classList.add("dropdown-item", "topping-dropdown-item")
+//         aTop.innerText = objTopping.name
+//     topDD.append(aTop)
+
+//     aTop.addEventListener("click", (evt)=>{
+//         foundToppingObj = objTopping
+//         selectedTopping.innerText = `Selected Topping: ${objTopping.name}`
+//     })
+// }

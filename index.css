@@ -19,12 +19,12 @@ div.right{
 }
 
 img{
-    width: 300x;
-    height: 300px;
+    width: 100%;
+   height: 500px;
 }
 
 body {
-    background-image: url('image/bg.jpg');
+    background: url('image/bg.jpg') no-repeat center center fixed;
 }
 
 h1{
