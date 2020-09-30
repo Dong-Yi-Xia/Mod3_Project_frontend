@@ -1,9 +1,10 @@
 header {
-    height: 100px;
-    width: 100%;
-    border: solid;
+    /* height: 100px; */
+    /* width: 100%; */
+    /* border: solid; */
     font-family: 'Petit Formal Script', cursive;
     color: rgb(209, 32, 209);
+  
 }
 
 div.left{
@@ -11,7 +12,7 @@ div.left{
 }
 
 div.middle{
-   background-color: rgb(232, 206, 240, .4);
+   background-color: rgba(213, 181, 223, 0.4);
 }
 
 div.right{
@@ -20,7 +21,7 @@ div.right{
 
 img{
     width: 100%;
-   height: 500px;
+   height: 600px;
 }
 
 body {
@@ -30,10 +31,12 @@ body {
 h1{
     font-family: 'Satisfy', cursive;
     color: rgb(159, 23, 201); 
-    font-size: 90px;
-    font-weight: bold;
-    /* text-shadow: 4px 4px 8px #ff672b; */
-    text-shadow: 0 0 3px #8c00ff, 0 2px 5px #ff6600;
+    margin-left: 500px;
+    font-size: 200px;
+     /* font-weight: bold;  */
+     /* text-shadow: 4px 4px 8px #ff672b;  */
+     text-shadow: 0 0 3px #ff7b00, 0 2px 5px #fc8b30;
+   
 }
 
 div.flavorList{
@@ -45,3 +48,20 @@ div.flavorList{
 h4{
 color: rgb(43, 22, 43)
 }
+
+div#reviews{
+ font-family: 'Satisfy', cursive;
+ color: rgb(41, 27, 233);
+ font-size: 30px;
+}
+
+
+button#purchaseButton.btn.btn-secondary{
+    color:rgb(208, 255, 0);  
+}
+
+h2{
+    margin-left: 20px;
+}
+
+
