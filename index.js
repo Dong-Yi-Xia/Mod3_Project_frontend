@@ -25,7 +25,7 @@ let formReview = document.querySelector('div#form-review')
 let foundToppingObj 
 let foundMilkObj 
 let foundScoopObj 
-let foundFlavorObj 
+let foundFlavorObj
 
 let foundUserObj = 1
 
@@ -82,9 +82,12 @@ function turnintoList(objFlavor) {
     flavorList.append(listUL)
     listUL.append(listLI)
     listLI.innerText = objFlavor.name
+
+    let heart = document.createElement('span')
+    heart.innerText = objFlavor.like ? "♥" :  "♡"
+    listUL.append(heart)
     
     changeToPointer(listLI)
-    
     listLI.addEventListener("click", (evt)=>{
         // menuNarBar.style.display = "block"
         foundFlavorObj = objFlavor
@@ -99,17 +102,42 @@ function turnintoList(objFlavor) {
         reviewUL.innerText = ""
         objFlavor.reviews.forEach(reviewObj => {
             addingReviewObjtoHTML(reviewObj)
-        })
-
-       
+        })     
 
         displayTotal()
-
-        
     })
+
+    changeToPointer(heart)
+    heart.addEventListener("click", (evt)=>{
+        heartTurnOnOff(objFlavor, heart)
+    })
+
 }
 
-// ice cream options
+
+// heart like methods 
+// _______________________________________________________________________
+let heartTurnOnOff = (objFlavor, heart) =>{
+    let redheart = !objFlavor.like
+    fetch(`http://localhost:3000/flavors/${objFlavor.id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            like: redheart
+        })  
+    })
+    .then(r => r.json())
+    .then(response => {
+        objFlavor.like = response.like
+        heart.innerText = response.like ? "♥" :  "♡"
+    })
+
+}
+
+
+// review helper methods 
 // _______________________________________________________________________
 let addingReviewObjtoHTML = (reviewObj) => {
         let reviewLI = document.createElement('li')
@@ -117,7 +145,7 @@ let addingReviewObjtoHTML = (reviewObj) => {
         let reviewDeleteButton = document.createElement('button')
             reviewDeleteButton.innerText = "Remove Review"
         reviewLI.append(reviewDeleteButton)
-        reviewUL.append(reviewLI)
+        reviewUL.prepend(reviewLI)
 
         deleteAReview(reviewDeleteButton, reviewObj, reviewLI)   
     }
@@ -139,10 +167,13 @@ let deleteAReview = (reviewDeleteButton, reviewObj, reviewLI) =>{
 
 let createReviewForm = (objFlavor) =>{
     let formLabel = document.createElement('label')
-        formLabel.innerText = "Creating a New Review"
+        formLabel.innerText = "Create a Reviews"
     let formTextArea = document.createElement('textarea')
         formTextArea.id = "reviewContent"
         formTextArea.type = "text"
+        formTextArea.placeholder = "Please First, Select a FLAVOR, a TOPPING, a MILK base, and the Number of SCOOPS"
+        formTextArea.rows = "5"
+        formTextArea.cols = "40"
     let formButton = document.createElement('button')
         formButton.type = "submit"
         formButton.id = "submitReviewButton"
@@ -178,12 +209,17 @@ let submitAReview = (formButton, formTextArea, objFlavor) => {
             addingReviewObjtoHTML(createReviewObj)
             //Update Inner Memory
             objFlavor.reviews.push(createReviewObj)
+
+            formReview.innerText = ""
+            createReviewForm(objFlavor)
         })
 
     })
 }
 
 
+// ice cream options
+// _______________________________________________________________________
 function options(){  
     
     toppingDD.addEventListener("change", (evt)=>{
@@ -237,6 +273,8 @@ function options(){
 
 options()
 
+
+
 // ice cream options display
 // _______________________________________________________________________
 
@@ -246,6 +284,8 @@ function addToppingOption (objTopping) {
         optionsTop.innerText = `$${objTopping.price} - ${objTopping.name}`
     toppingDD.append(optionsTop)
 }
+
+
 
 function addMilkOption (objMilk) {
     let optionsMilk = document.createElement('option')
@@ -265,10 +305,12 @@ function displayTotal(){
     // seeTotalButton.addEventListener("click", (evt)=>{   
         displayPrice.innerText = ''
         let priceH2 = document.createElement('h2')
-            priceH2.innerText = `Price: $${foundToppingObj.price +foundMilkObj.price + foundScoopObj.price + foundFlavorObj.price}`
+            priceH2.innerText = `Total Price: $${foundToppingObj.price +foundMilkObj.price + foundScoopObj.price + foundFlavorObj.price}`
         displayPrice.append(priceH2)
+        
     // })
 }
+
 
 // extra
 // _______________________________________________________________________=
