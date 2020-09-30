@@ -6,6 +6,18 @@ header {
     color: rgb(209, 32, 209);
 }
 
+div.left{
+   background-color: rgb(232, 206, 240, .4);
+}
+
+div.middle{
+   background-color: rgb(232, 206, 240, .4);
+}
+
+div.right{
+ background-color: rgb(232, 206, 240, .4);
+}
+
 img{
     width: 100%;
    height: 600px;
@@ -14,7 +26,6 @@ img{
 body {
     background: url('image/bg.jpg') no-repeat center center fixed;
 }
-
 
 h1 { 
     font-family: 'Pacifico', cursive; 
