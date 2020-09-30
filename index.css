@@ -28,16 +28,7 @@ body {
     background: url('image/bg.jpg') no-repeat center center fixed;
 }
 
-h1{
-    font-family: 'Satisfy', cursive;
-    color: rgb(159, 23, 201); 
-    margin-left: 500px;
-    font-size: 200px;
-     /* font-weight: bold;  */
-     /* text-shadow: 4px 4px 8px #ff672b;  */
-     text-shadow: 0 0 3px #ff7b00, 0 2px 5px #fc8b30;
-   
-}
+
 
 div.flavorList{
    font-family: 'Satisfy', cursive;
