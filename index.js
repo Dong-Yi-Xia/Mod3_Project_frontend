@@ -15,12 +15,13 @@ let selectedScoop = document.querySelector('p#selectedScoop')
 let selectedPrice = document.querySelector('p#totalPrice')
 
 let seeTotalButton = document.querySelector('button#addButton')
-// let purchaseButton = document.querySelector('button#purchaseButton')
+let purchaseButton = document.querySelector('button#purchaseButton')
 let reviewBox = document.querySelector('div#reviews')
 let reviewUL = document.querySelector('ul#reviewUL')
 let submitReviewButton = document.querySelector('button#submitReviewButton')
 let reviewContent = document.querySelector('textarea#reviewContent')
 let formReview = document.querySelector('div#form-review')
+
 
 let foundToppingObj 
 let foundMilkObj 
@@ -29,9 +30,7 @@ let foundFlavorObj
 
 let foundUserObj = 1
 
-
-
-
+let mainBody = document.querySelector('div.main-body')
 
 
 // fetch request
@@ -105,6 +104,7 @@ function turnintoList(objFlavor) {
         })     
 
         displayTotal()
+
     })
 
     changeToPointer(heart)
@@ -129,12 +129,19 @@ let heartTurnOnOff = (objFlavor, heart) =>{
         })  
     })
     .then(r => r.json())
-    .then(response => {
-        objFlavor.like = response.like
-        heart.innerText = response.like ? "♥" :  "♡"
+    .then(objFlavorUpdate => {
+        objFlavor.like = objFlavorUpdate.like
+        heart.innerText = objFlavorUpdate.like ? "♥" :  "♡"
     })
 
 }
+
+
+// let purchaseNow = () => {
+//     purchaseButton.addEventListener("click", (evt)=>{
+//         console.log("asdasdadasa")
+//     })
+// }
 
 
 // review helper methods 
@@ -266,8 +273,8 @@ function options(){
         })
     })
 
-
     displayTotal()
+
 }
 
 
@@ -307,10 +314,41 @@ function displayTotal(){
         let priceH2 = document.createElement('h2')
             priceH2.innerText = `Total Price: $${foundToppingObj.price +foundMilkObj.price + foundScoopObj.price + foundFlavorObj.price}`
         displayPrice.append(priceH2)
-        
+
+        purchaseNow()
     // })
 }
 
+function purchaseNow(){
+    purchaseButton.addEventListener("click", (evt)=>{ 
+        fetch('http://localhost:3000/purchased_logs', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                //need to create userObj 
+                user_id: foundUserObj,
+                flavor_id: foundFlavorObj.id,
+                topping_id: foundToppingObj.id,
+                milk_id: foundMilkObj.id,
+                scoop_id: foundScoopObj.id,
+                price: foundToppingObj.price +foundMilkObj.price + foundScoopObj.price + foundFlavorObj.price
+            })
+        })
+        .then(r => r.json())
+        .then(createPurchasedObj => {
+            mainBody.innerText = ""
+            let thankYouH1 = document.createElement('h1')
+                thankYouH1.innerText = `Thank You For Your Purchase!!! See You Again. 
+                Flavor: ${foundFlavorObj.name}
+                Topping: ${foundToppingObj.name} 
+                Milk Base: ${foundMilkObj.name}  
+                # of Scoops: ${foundScoopObj.number}` 
+            mainBody.append(thankYouH1)
+        })
+    })
+}
 
 // extra
 // _______________________________________________________________________=
