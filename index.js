@@ -342,12 +342,12 @@ function purchaseNow(){
             mainBody.innerText = ""
             let thankYouH1 = document.createElement('h1')
                 thankYouH1.id = "thankyou"
-
                 thankYouH1.innerText = `Thank You For Your Purchase!!! See You Again. 
                 Flavor: ${foundFlavorObj.name}
                 Topping: ${foundToppingObj.name} 
                 Milk Base: ${foundMilkObj.name}  
-                # of Scoops: ${foundScoopObj.number}` 
+                # of Scoops: ${foundScoopObj.number}
+                Total Price: $${foundToppingObj.price + foundMilkObj.price + foundScoopObj.price + foundFlavorObj.price}` 
             mainBody.append(thankYouH1)
         })
     })
