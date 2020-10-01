@@ -1,15 +1,15 @@
 
 
-h1{
-    font-family: 'Pacifico', cursive;
+/* h1{ */
+    /* font-family: 'Pacifico', cursive;
     text-shadow: 0 0 3px #d0ff00, 0 5px 5px #eeff00;
     text-align: center;
     color: rgb(255, 40, 112);
-    font-size: 90px;
-    font-weight: bolder;
-    margin: 0%;
-    padding: 0%;
-   }
+    font-size: 90px; */
+    /* font-weight: bolder; */
+    /* margin: 0%; */
+    /* padding: 0%; */
+   /* } */
 
 div.left{
    background-color: rgb(232, 206, 240, .4);
@@ -52,6 +52,7 @@ button#purchaseButton.btn.btn-secondary{
     color:rgb(0, 255, 21); 
     font-family: 'Pacifico', cursive;
     background-color: rgb(255, 80, 162);
+    margin-left: 20px;
 }
 
 label#toppings{
@@ -66,8 +67,8 @@ div.menuNarBar{
     font-family: 'Satisfy', cursive;
     font-size: 22px;
     color: rgb(255, 0, 255);
-    margin: 22px;
-    padding: 8px;
+    margin-left: 100px;
+    padding: 10px 10px;
 }
 /* dropdown font */
 select#milkDropDown{
@@ -117,4 +118,15 @@ div.reviews{
 
 ul#reviewsUl{
    font-family:'Satisfy', cursive;
+}
+
+header.menubar{
+    font-family: 'Pacifico', cursive;
+    text-shadow: 0 0 3px #d0ff00, 0 5px 5px #eeff00;
+    text-align: center;
+    color: rgb(255, 40, 112);
+    font-size: 100px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+
 }
