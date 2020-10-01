@@ -29,11 +29,13 @@ img{
 }
 /* bkg img */
 body {
+
     background-image: url('image/\ Harvest.jpeg');
     background-size: cover;                      /* <------ */
     background-repeat: no-repeat; 
     background-position: fixed center; 
 }
+
 
 div.flavorList{
    font-family: 'Satisfy', cursive;
@@ -58,6 +60,7 @@ button#purchaseButton.btn.btn-secondary{
 label#toppings{
     margin-right: 4px;
 }
+
 
 select.toppings{
     font-weight: bold;
@@ -176,3 +179,4 @@ label#reviewHeader{
 textarea#reviewContent{
     
 }
+

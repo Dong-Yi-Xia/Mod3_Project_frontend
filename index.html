@@ -9,6 +9,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Petit+Formal+Script&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Satisfy&display=swap" rel="stylesheet"> 
+
     <!--bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -41,6 +42,14 @@
         </div> -->
 
 
+        <!-- <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Toppings:
+          </button>
+          <div class="dropdown-menu" id="topDDButton" aria-labelledby="dropdownMenuButton"> </div>
+        </div> -->
+
+
         <label for="toppings">Toppings:</label>
         <select id="toppingDropDown">
           <option value="">Select One Topping</option>
@@ -49,6 +58,12 @@
         <label for="milks">Milks:</label>
         <select id="milkDropDown">
           <option value="">Select One Base</option>
+        </select>
+
+        <label for="scoops">Scoops:</label>
+        <select id="scoopDropDown">
+          <option value="">Select A Number of Scoops</option>
+
         </select>
 
         <label for="scoops">Scoops:</label>
@@ -63,6 +78,7 @@
 
         <button type="submit" id="purchaseButton" type="button" class="btn btn-secondary">Purchase Now</button>
       </div>
+
 
       <div class="container">
         <div class="row">
