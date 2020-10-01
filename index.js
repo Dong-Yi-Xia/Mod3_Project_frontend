@@ -174,7 +174,8 @@ let deleteAReview = (reviewDeleteButton, reviewObj, reviewLI) =>{
 
 let createReviewForm = (objFlavor) =>{
     let formLabel = document.createElement('label')
-        formLabel.innerText = "Create a Reviews"
+        formLabel.innerText = "Create a Review"
+        formLabel.id = "reviewHeader"
     let formTextArea = document.createElement('textarea')
         formTextArea.id = "reviewContent"
         formTextArea.type = "text"
@@ -340,6 +341,7 @@ function purchaseNow(){
         .then(createPurchasedObj => {
             mainBody.innerText = ""
             let thankYouH1 = document.createElement('h1')
+                thankYouH1.id = "thankyou"
                 thankYouH1.innerText = `Thank You For Your Purchase!!! See You Again. 
                 Flavor: ${foundFlavorObj.name}
                 Topping: ${foundToppingObj.name} 

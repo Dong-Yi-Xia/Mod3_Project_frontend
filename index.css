@@ -16,11 +16,11 @@ div.left{
 }
 
 div.middle{
-   background-color: rgba(213, 181, 223, 0.4);
+   background-color: rgba(229, 240, 227, 0.4);
 }
 
 div.right{
- background-color: rgb(232, 206, 240, .4);
+ background-color: rgba(238, 164, 135, 0.4);
 }
 /* images of flavors size */
 img{
@@ -129,4 +129,50 @@ header.menubar{
     padding-bottom: 20px;
     padding-top: 20px;
 
+}
+
+header.menubar h1{
+    font-size: 1.3em;
+}
+
+h1#thankyou {
+    background-color: rgba(128, 231, 238, 0.4);
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+    color: rgb(255, 40, 112);
+    text-shadow: 0 0 3px #d0ff00, 0 5px 5px #eeff00;
+}
+
+button#submitReviewButton{
+    color: rgb(0, 255, 21);
+    font-family: 'Pacifico', cursive;
+    background-color: rgb(255, 80, 162);
+    margin-left: 20px;
+}
+
+ul#reviewUL button{
+    display: block;
+    color: rgb(0, 255, 21);
+    font-family: 'Pacifico', cursive;
+    background-color: rgb(255, 80, 162);
+    margin-left: 20px;
+    font-size: .5em
+}
+
+ul#reviewUL li{
+    margin: 10px;
+    list-style-type: none;
+    padding: 10px;
+    display: block;
+    overflow-wrap: break-word;
+}
+
+label#reviewHeader{
+    font-family: 'Satisfy', cursive;
+    color: rgb(41, 27, 233);
+    font-size: 30px;
+}
+
+textarea#reviewContent{
+    
 }
