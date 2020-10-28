@@ -36,7 +36,7 @@ let mainBody = document.querySelector('div.main-body')
 // fetch request
 // _______________________________________________________________________
 
-fetch('http://localhost:3000/scoops')
+fetch('https://mod3icecream-api.herokuapp.com/scoops')
 .then(r => r.json())
 .then(objArr => {
     objArr.forEach(objScoop => {
@@ -44,7 +44,7 @@ fetch('http://localhost:3000/scoops')
     })
 });
 
-fetch('http://localhost:3000/milks')
+fetch('https://mod3icecream-api.herokuapp.com/milks')
 .then(r => r.json())
 .then(objArr => {
     objArr.forEach(objMilk => {
@@ -52,7 +52,7 @@ fetch('http://localhost:3000/milks')
     })
 });
 
-fetch('http://localhost:3000/toppings')
+fetch('https://mod3icecream-api.herokuapp.com/toppings')
 .then(r => r.json())
 .then(objArr => {
     objArr.forEach(objTopping => {
@@ -61,7 +61,7 @@ fetch('http://localhost:3000/toppings')
 });
 
 
-fetch('http://localhost:3000/flavors')
+fetch('https://mod3icecream-api.herokuapp.com/flavors')
 .then(r => r.json())
 .then(objArr => {
     objArr.forEach(objFlavor => {
@@ -119,7 +119,7 @@ function turnintoList(objFlavor) {
 // _______________________________________________________________________
 let heartTurnOnOff = (objFlavor, heart) =>{
     let redheart = !objFlavor.like
-    fetch(`http://localhost:3000/flavors/${objFlavor.id}`, {
+    fetch(`https://mod3icecream-api.herokuapp.com/flavors/${objFlavor.id}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json"
@@ -160,7 +160,7 @@ let addingReviewObjtoHTML = (reviewObj) => {
 
 let deleteAReview = (reviewDeleteButton, reviewObj, reviewLI) =>{
     reviewDeleteButton.addEventListener("click", (evt)=>{
-        fetch(`http://localhost:3000/reviews/${reviewObj.id}`, {
+        fetch(`https://mod3icecream-api.herokuapp.com/reviews/${reviewObj.id}`, {
             method: "DELETE"
         })
         .then(r => r.json())
@@ -196,7 +196,7 @@ let submitAReview = (formButton, formTextArea, objFlavor) => {
         evt.preventDefault()
 
         let content = formTextArea.value
-        fetch('http://localhost:3000/reviews', {
+        fetch('https://mod3icecream-api.herokuapp.com/reviews', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -233,7 +233,7 @@ function options(){
     toppingDD.addEventListener("change", (evt)=>{
         currentInput = evt.target.value
         selectedTopping.innerText = `Selected Topping: ${currentInput}`
-        fetch('http://localhost:3000/toppings')
+        fetch('https://mod3icecream-api.herokuapp.com/toppings')
         .then(r => r.json())
         .then(objArr => {
             let found = objArr.find(ele => {
@@ -248,7 +248,7 @@ function options(){
         currentInput = evt.target.value
         selectedMilk.innerText = `Selected Milk: ${currentInput}`
 
-        fetch('http://localhost:3000/milks')
+        fetch('https://mod3icecream-api.herokuapp.com/milks')
         .then(r => r.json())
         .then(objArr => {
             let found = objArr.find(ele => {
@@ -263,7 +263,7 @@ function options(){
         currentInput = evt.target.value
         selectedScoop.innerText = `Selected Scoop: ${currentInput}`
 
-        fetch('http://localhost:3000/scoops')
+        fetch('https://mod3icecream-api.herokuapp.com/scoops')
         .then(r => r.json())
         .then(objArr => {
             let found = objArr.find(ele => {
@@ -322,7 +322,7 @@ function displayTotal(){
 
 function purchaseNow(){
     purchaseButton.addEventListener("click", (evt)=>{ 
-        fetch('http://localhost:3000/purchased_logs', {
+        fetch('https://mod3icecream-api.herokuapp.com/purchased_logs', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
