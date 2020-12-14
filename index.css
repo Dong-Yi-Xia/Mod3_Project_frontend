@@ -163,6 +163,10 @@ div.left{
      font-size: 30px;
  }
  
- textarea#reviewContent{
-     
+ footer{
+    bottom: 0;
+    text-shadow: 1px 1px 5px  white;
+    font-weight: bold;
+    text-align: center;
  }
+
